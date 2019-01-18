@@ -5,6 +5,7 @@
 $ python3 -m venv venv
 $ source ./venv/bin/activate
 ```
+参考: https://qiita.com/fiftystorm36/items/b2fd47cf32c7694adc2e 
 
 pipパッケージのインストール
 ```
