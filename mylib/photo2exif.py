@@ -25,6 +25,28 @@ def getExif(file):
 
     return exif_data
 
+def getDeg(data):
+    d = float(data[0][0]) / float(data[0][1])
+    m = float(data[1][0]) / float(data[1][1])
+    s = float(data[2][0]) / float(data[2][1])
+    return d + (m / 60.0) + (s/3600.0)
+
+def getGPS(data):
+    lat = getDeg(data['GPSLatitude'])
+    lat_ref = data['GPSLatitudeRef']
+    if lat_ref != 'N':
+        lat = 0 - lat
+    lon = getDeg(data['GPSLongitude'])
+    lon_ref = data['GPSLongitudeRef']
+    if lon_ref != 'E':
+        lon = 0 - lon
+    return lat, lon
+
+def getMapUrl(data):
+    (lat, lon) = getGPS(data['GPSInfo'])
+    url = 'http://maps.google.co.jp/maps?q=' + str(lat) + ',' + str(lon)
+    return url
+
 if __name__ == '__main__':
     # 画像参考: http://www.ksky.ne.jp/~yamama/jpggpsmap/sample/sample.htm
     # file = 'sample_photo/sample_saitama.jpg'
@@ -33,3 +55,5 @@ if __name__ == '__main__':
     data = getExif(file)
     for i, v in data.items():
         print(i, v)
+    map_url = getMapUrl(data)
+    print(map_url)
