@@ -1,5 +1,6 @@
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
+import urllib.request
 
 
 def getExif(file):
@@ -25,7 +26,10 @@ def getExif(file):
     return exif_data
 
 if __name__ == '__main__':
-    file = 'sample_photo/sample_saitama.jpg'
+    # 画像参考: http://www.ksky.ne.jp/~yamama/jpggpsmap/sample/sample.htm
+    # file = 'sample_photo/sample_saitama.jpg'
+    url = 'http://www.ksky.ne.jp/~yamama/jpggpsmap/sample/AkihabaraKousaten.JPG'
+    file = urllib.request.urlopen(url)
     data = getExif(file)
     for i, v in data.items():
         print(i, v)
