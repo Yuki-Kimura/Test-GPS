@@ -49,7 +49,9 @@ def getMapUrl(data):
 
 if __name__ == '__main__':
     # 画像参考: http://www.ksky.ne.jp/~yamama/jpggpsmap/sample/sample.htm
+    # ローカルに画像ファイルがある場合こっち
     # file = 'sample_photo/sample_saitama.jpg'
+    # Web上の画像を使う場合こっち
     url = 'http://www.ksky.ne.jp/~yamama/jpggpsmap/sample/AkihabaraKousaten.JPG'
     file = urllib.request.urlopen(url)
     data = getExif(file)
